@@ -20,7 +20,7 @@ class Message {
                 chat: chatId
             });
 
-            console.log(newMessage);
+            // console.log(newMessage);
 
             newMessage = await MessageModel.populate(newMessage, [
                 { path: "sender", select: "name email" },
@@ -44,12 +44,13 @@ class Message {
 
     async fetchMessages(req, res) {
         try {
-            const { chatId } = req.body;
-
+            // const { chatId } = req.body;
+            // console.log(chatId)
+            const chatId ='65b7324df125cc2f722cd65e'
             const messages = await MessageModel.find({ chat: chatId })
                 .populate("sender", "name email")
                 .populate("chat");
-            console.log("Messages", messages)
+            // console.log("Messages", messages)
             return sendResponse(
                 res,
                 HTTP_STATUS.OK, " All Messages.", messages

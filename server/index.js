@@ -13,7 +13,7 @@ const express = require("express");
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
-  pingTimeout:60000, //After 60 seconds its going to close the connection
+  pingTimeout: 60000, //After 60 seconds its going to close the connection
   cors: {
     origin: "http://localhost:5173",
     method: ["GET", "POST"],
@@ -53,6 +53,29 @@ app.use("*", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log("User Connected socket.io");
+  // socket.on("setup", (userData) => {
+  //   console.log(userData.id)
+  //   socket.join(userData.id);
+  //   socket.emit("connected");
+  // });
+  socket.on('setup', (userData) => {
+    socket.join(userData);
+    console.log('UserConnected: ' + userData);
+    socket.emit('connected');
+  });
+
+  socket.on('join chat', (room) => {
+    socket.join(room);
+    console.log('User joined room: ' + room);
+  });
+
+
+
+  socket.on("sendMessage", ({ userId, content }) => {
+    console.log(userId);
+    console.log(content)
+    io.to(userId).emit("receiveMessage", { sender: socket.id, content });
+  });
 
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
