@@ -7,7 +7,6 @@ const UserModel = require("../models/userModel");
 const jsonwebtoken = require("jsonwebtoken");
 class Chat {
     async accessChat(req, res) {
-
         try {
             const { userId } = req.body;
             const jwtToken = req.headers.authorization.split(" ")[1];
