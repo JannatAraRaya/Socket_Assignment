@@ -4,7 +4,6 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const { sendResponse } = require("./utils/handleResponse");
 const HTTP_STATUS = require("./constants/http_codes");
-const HTTP_MESSAGE = require("./constants/http_messgaes");
 
 // Database connection
 const databaseConnection = require("./config/database");

@@ -2,7 +2,6 @@ const fs = require("fs");
 const { validationResult } = require("express-validator");
 const { sendResponse } = require("../utils/handleResponse");
 const HTTP_STATUS = require("../constants/http_codes");
-const HTTP_MESSAGE = require("../constants/http_messgaes");
 const userService = require("../service/userService");
 
 
@@ -14,7 +13,7 @@ class User {
         return sendResponse(
           res,
           HTTP_STATUS.UNPROCESSABLE_ENTITY,
-          HTTP_MESSAGE.FAILED_DEPENDENCY,
+          "Failed to add the user!",
           validation
         );
       }
@@ -24,21 +23,20 @@ class User {
         return sendResponse(
           res,
           HTTP_STATUS.OK,
-          HTTP_MESSAGE.ACCEPTED,
+          "Successfully added the user",
           user
         );
       }
       return sendResponse(
         res,
         HTTP_STATUS.UNPROCESSABLE_ENTITY,
-        HTTP_MESSAGE.FAILED_DEPENDENCY
+        "Failed to add the user!"
       );
     } catch (error) {
      console.log("User:",error)
       return sendResponse(
         res,
-        HTTP_STATUS.INTERNAL_SERVER_ERROR,
-        HTTP_MESSAGE.INTERNAL_SERVER_ERROR
+        HTTP_STATUS.INTERNAL_SERVER_ERROR,"Internal Server Error..."
       );
     }
   }
