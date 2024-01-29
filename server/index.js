@@ -13,6 +13,7 @@ const express = require("express");
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
+  pingTimeout:60000, //After 60 seconds its going to close the connection
   cors: {
     origin: "http://localhost:5173",
     method: ["GET", "POST"],
@@ -27,10 +28,12 @@ app.use(express.urlencoded({ extended: true }));
 // Exporting all the routes
 const usersRouter = require("./routes/user");
 const chatsRouter = require("./routes/chat");
+const messageRouter = require("./routes/message");
 
 // Main routers
 app.use("/user", usersRouter);
 app.use("/chats", chatsRouter);
+app.use("/messages", messageRouter);
 
 // Error Handler
 app.use((err, req, res, next) => {
@@ -49,21 +52,7 @@ app.use("*", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("User Connected");
-
-  // socket.on("message", ({ room, message }) => {
-  //   console.log({ room, message });
-  //   socket.to(room).emit("receive-message", message);
-  // });
-
-  socket.on("join-room", (data) => {
-    socket.join(data);
-    console.log(`User joined room ${data}`);
-  });
-  socket.on("send_message", (data) => {
-    console.log(data)
-    socket.to(data.room).emit("receive_message", data);
-  });
+  console.log("User Connected socket.io");
 
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);

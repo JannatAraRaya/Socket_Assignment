@@ -15,11 +15,13 @@ const userSchema = new mongoose.Schema(
         type:String,
         require:true,
     },
-    is_online:{
-        type:String,
-    }
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   { timestamp: true }
 );
-const User = mongoose.model("users", userSchema);
+const User = mongoose.model("User", userSchema);
 module.exports = User;
