@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./ShowChat.scss";
 import { jwtDecode } from 'jwt-decode';
 
-function ShowChat({ socket, room }) {
+function ShowChat() {
   const [messageList, setMessageList] = useState([]);
   const user = jwtDecode(localStorage.getItem('token'));
   const chatId = '65b7324df125cc2f722cd65e';
+  
   useEffect(() => {
     const fetchMessages = async () => {
        
       try {
-        const response = await fetch(`http://127.0.0.1:8000/messages/fetch/${chatId}`);
+        const response = await fetch(`http://localhost:8000/messages/fetch/${chatId}`);
         if (response.ok) {
           const { result: messages } = await response.json();
           setMessageList(messages);
