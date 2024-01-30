@@ -4,5 +4,5 @@ const messageController = require("../controllers/messageController");
 
 
 routes.post("/send",messageController.sendMessages);
-routes.get("/fetch",messageController.fetchMessages);
+routes.get("/fetch/:chatId",messageController.fetchMessages);
 module.exports = routes;

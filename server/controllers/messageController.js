@@ -42,18 +42,26 @@ class Message {
         }
     }
 
+
     async fetchMessages(req, res) {
         try {
-            // const { chatId } = req.body;
-            // console.log(chatId)
-            const chatId ='65b7324df125cc2f722cd65e'
+            const { chatId } = req.params; 
             const messages = await MessageModel.find({ chat: chatId })
                 .populate("sender", "name email")
                 .populate("chat");
-            // console.log("Messages", messages)
+    
             return sendResponse(
                 res,
-                HTTP_STATUS.OK, " All Messages.", messages
+                HTTP_STATUS.OK, " All Messages.",
+                messages.map(message => ({
+                    sender: {
+                        id: message.sender._id,
+                        name: message.sender.name,
+                        email: message.sender.email
+                    },
+                    content: message.content,
+                    chat: message.chat
+                }))
             );
         } catch (error) {
             console.log("Error:", error);
@@ -63,6 +71,7 @@ class Message {
             );
         }
     }
+    
 }
 
 
