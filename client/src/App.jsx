@@ -2,7 +2,6 @@ import "./App.css";
 import io from "socket.io-client";
 import { useState } from "react";
 import Chat from "./pages/Home";
-import ShowChat from "./pages/ShowChat";
 
 const socket = io.connect("http://localhost:3000");
 
@@ -21,7 +20,7 @@ function App() {
     <div className="App">
       {!showChat ? (
         <div className="joinChatContainer">
-          <h3>Join A Chat</h3>\
+          <h3>Join A Chat</h3>
      
           <input
             type="text"

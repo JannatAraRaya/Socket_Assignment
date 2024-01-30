@@ -67,7 +67,7 @@ class User {
         );
       }
       const passwordMatch = await bcrypt.compare(password, user.password);
-      // const passwordMatch = password === user.password ? true : false;
+      
       console.log(passwordMatch);
       if (passwordMatch) {
         return sendResponse(res, HTTP_STATUS.OK, "Successfully Logged in!");
@@ -87,9 +87,6 @@ class User {
       );
     }
   }
-
-
-
 }
 
 module.exports = new User();

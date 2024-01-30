@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { jwtDecode } from 'jwt-decode';
-import { responsiveFontSizes } from "@material-ui/core";
 import ShowChat from "./ShowChat";
+
+
+
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);

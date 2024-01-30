@@ -1,9 +1,7 @@
-// Add your existing styles here
-
 .message-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; // Default alignment
+    align-items: flex-start; 
   
     .message {
       margin: 8px;
@@ -12,15 +10,15 @@
       max-width: 70%;
   
       &.you {
-        align-self: flex-end; // Align to the right if the sender is the current user
-        background-color: #DCF8C6; // Example background color for your messages
-        color: #333; // Example text color for your messages
+        align-self: flex-end; 
+        background-color: #DCF8C6; 
+        color: #333; 
       }
   
       &.other {
-        align-self: flex-start; // Align to the left if the sender is someone else
-        background-color: #E3E3E3; // Example background color for other messages
-        color: #333; // Example text color for other messages
+        align-self: flex-start; 
+        background-color: #E3E3E3;
+        color: #333; 
       }
   
       .message-content {

@@ -1,9 +1,7 @@
 const fs = require("fs");
-const { validationResult } = require("express-validator");
 const { sendResponse } = require("../utils/handleResponse");
 const HTTP_STATUS = require("../constants/http_codes");
 const ChatModel = require("../models/chatModel");
-const UserModel = require("../models/userModel");
 const MessageModel = require("../models/messageModel")
 const jsonwebtoken = require("jsonwebtoken");
 class Message {
@@ -19,8 +17,6 @@ class Message {
                 content,
                 chat: chatId
             });
-
-            // console.log(newMessage);
 
             newMessage = await MessageModel.populate(newMessage, [
                 { path: "sender", select: "name email" },
