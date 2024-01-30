@@ -1,4 +1,3 @@
-const fs = require("fs");
 const { validationResult } = require("express-validator");
 const { sendResponse } = require("../utils/handleResponse");
 const HTTP_STATUS = require("../constants/http_codes");

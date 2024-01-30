@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ScrollToBottom from "react-scroll-to-bottom";
 import "./ShowChat.scss";
 import { jwtDecode } from 'jwt-decode';
 

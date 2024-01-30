@@ -1,4 +1,3 @@
-const fs = require("fs");
 const { sendResponse } = require("../utils/handleResponse");
 const HTTP_STATUS = require("../constants/http_codes");
 const ChatService  = require("../service/chatService");
