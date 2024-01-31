@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "./ShowChat.scss";
-import { jwtDecode } from 'jwt-decode';
 
-function ShowChat() {
+function ShowChat({senderId}) {
   const [messageList, setMessageList] = useState([]);
-  const user = jwtDecode(localStorage.getItem('token'));
+  console.log(senderId)
+  const user =senderId
+  // const user = jwtDecode(localStorage.getItem('token'));
   const chatId = '65b7324df125cc2f722cd65e';
   
   useEffect(() => {
     const fetchMessages = async () => {
        
-      try {
+      try {      
         const response = await fetch(`http://localhost:8000/messages/fetch/${chatId}`);
-        if (response.ok) {
+        console.log(response)
+        if (response) {
           const { result: messages } = await response.json();
           setMessageList(messages);
         } else {
@@ -31,7 +33,7 @@ function ShowChat() {
         <div
           className="message"
         //   key={messageContent.sender.id}
-          id={user.id === messageContent.sender.id ? "you" : "other"}
+          id={user === messageContent.sender.id ? "you" : "other"}
         >
           <div>
             <div className="message-content">

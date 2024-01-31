@@ -6,13 +6,14 @@ const jsonwebtoken = require("jsonwebtoken");
 class Message {
     async sendMessages(req, res) {
         try {
-            const { content, chatId } = req.body;
-            const jwtToken = req.headers.authorization.split(" ")[1];
-            const decodedToken = jsonwebtoken.decode(jwtToken);
-            const decodedId = decodedToken.id;
+            const { content, chatId ,sender} = req.body;
+            // const jwtToken = req.headers.authorization.split(" ")[1];
+            // const decodedToken = jsonwebtoken.decode(jwtToken);
+            // const decodedId = decodedToken.id;
 
             let newMessage = await MessageModel.create({
-                sender: decodedId,
+                // sender: decodedId,
+                sender:sender,
                 content,
                 chat: chatId
             });

@@ -9,6 +9,7 @@ function App() {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
+  const [userId, setUserId] = useState("");
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
@@ -21,12 +22,21 @@ function App() {
       {!showChat ? (
         <div className="joinChatContainer">
           <h3>Join A Chat</h3>
-     
+
           <input
             type="text"
-            placeholder="Your Name"
+            placeholder="Your Name...(for now it can be any)"
             onChange={(event) => {
               setUsername(event.target.value);
+
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Your ID..."
+            onChange={(event) => {
+              setUserId(event.target.value);
+
             }}
           />
           <input
@@ -39,7 +49,7 @@ function App() {
           <button onClick={joinRoom}>Join A Room</button>
         </div>
       ) : (
-        <Chat socket={socket} username={username} room={room} />
+        <Chat socket={socket} username={username} room={room} senderId={userId} />
       )}
     </div>
   );

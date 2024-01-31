@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { jwtDecode } from 'jwt-decode';
 import ShowChat from "./ShowChat";
 
 
 
-function Chat({ socket, username, room }) {
+function Chat({ socket, username, room ,senderId}) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  const user = jwtDecode(localStorage.getItem('token'));
+  // const user = jwtDecode(localStorage.getItem('token'));
   const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
         room: room,
         author: username,
-        sender:user.id,
+        // sender:senderId,
         content: currentMessage,
       };
 
       const chatId = '65b7324df125cc2f722cd65e';
-      const jwtToken = localStorage.getItem('token');
+      // const jwtToken = localStorage.getItem('token');
       try {
         const response = await fetch('http://127.0.0.1:8000/messages/send', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${jwtToken}`
+            // 'Authorization': `Bearer ${jwtToken}`
           },
           body: JSON.stringify({
             content: currentMessage,
-            chatId: chatId
+            chatId: chatId,
+            sender:senderId
           })
         });
 
@@ -61,7 +61,7 @@ function Chat({ socket, username, room }) {
    
         <ScrollToBottom 
         className="message-container">
-            <ShowChat/>
+            <ShowChat senderId={senderId}/>
           {messageList.map((messageContent) => {
             return (
               <div
@@ -72,9 +72,9 @@ function Chat({ socket, username, room }) {
                   <div className="message-content">
                     <p>{messageContent.content}</p>
                   </div>
-                  <div className="message-meta">
+                  {/* <div className="message-meta">
                     <p id="author">{messageContent.author}</p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             );
