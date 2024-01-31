@@ -1,10 +1,11 @@
 const { Server } = require("socket.io");
+const dotenv = require("dotenv").config();
 
 module.exports = (server) => {
   const io = new Server(server, {
     pingTimeout: 90000,
     cors: {
-      origin: "http://localhost:5173",
+      origin: process.env.FRONTEND_URL,
       method: ["GET", "POST"],
       credentials: true,
     },
